@@ -1,0 +1,12 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test
+    password: Spring$22
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
