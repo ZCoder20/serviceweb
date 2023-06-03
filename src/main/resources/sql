@@ -1,8 +1,130 @@
-https://www.airbnb.com/
-?tab_id=home_tab
-&refinement_paths%5B%5D=%2Fhomes
-&search_mode=flex_destinations_search
-&flexible_trip_lengths%5B%5D=one_week
-&location_search=MIN_MAP_BOUNDS&monthly_start_date=2023-06-01
-&monthly_length=3
-&price_filter_input_type=0&price_filter_num_nights=5&channel=EXPLORE&search_type=category_change&category_tag=Tag%3A789
+create table public.odrdata
+(
+    odrid        integer generated always as identity
+        constraint odrdata_pk
+            primary key,
+    postid       integer,
+    userid       integer,
+    odrurl       text,
+    orddetails   text,
+    ordtitle     text,
+    totalhr      integer,
+    totalprice   integer,
+    concent      text,
+    trmsaccepted boolean,
+    odrstatus    text
+);
+
+comment on column public.odrdata.orddetails is 'details';
+
+comment on column public.odrdata.concent is 'save all concents';
+
+alter table public.odrdata
+    owner to postgres;
+
+------posting------------
+
+create table public.onlineposting
+(
+    postid      integer generated always as identity
+        primary key,
+    posttitle   text,
+    posturl     text,
+    postdetails text,
+    total_v     integer,
+    total_s     integer,
+    total_l     integer,
+    total_p     double precision,
+    category    text,
+    price       integer,
+    userid      integer,
+    plat        text,
+    smname      text,
+    smage       integer,
+    monot       boolean,
+    isrestric   boolean,
+    rsn_rest    text,
+    imgpath     text,
+    isactive    boolean
+);
+
+comment on table public.onlineposting is 'This table store the posting data, which also include the image path';
+
+comment on column public.onlineposting.postid is 'Unique Identifier for data';
+
+comment on column public.onlineposting.userid is 'user unique key';
+
+alter table public.onlineposting
+    owner to postgres;
+
+
+    -----------paymanet------------
+
+    create table public.payment
+    (
+        pyid     integer          not null,
+        ordid    integer          not null,
+        userid   integer          not null,
+        pystatus integer          not null,
+        pymode   integer          not null,
+        pyamt    double precision not null,
+        pytype   text
+    );
+
+    comment on column public.payment.pymode is 'is it CC, paypal ';
+
+    comment on column public.payment.pytype is 'out or in ';
+
+    alter table public.payment
+        owner to postgres;
+
+    create unique index payment_pyid_uindex
+        on public.payment (pyid);
+
+------userinfo-----------
+
+
+create table public.userinfo
+(
+    userid             integer not null
+        primary key,
+    firstname          text,
+    middlename         text,
+    lastname           text,
+    dob                date,
+    streetaddress1     text,
+    streetaddress2     text,
+    city               text,
+    state              text,
+    country            text,
+    idnumber           integer,
+    idtype             text,
+    issuecountry       text,
+    citizencountry     text,
+    photoid            bytea,
+    taxdoc             bytea,
+    categorypreference text,
+    iscompany          boolean,
+    isseller           boolean,
+    email              text,
+    phonenum1          integer,
+    phonenum2          integer,
+    businessemail      text,
+    countryofbus       text,
+    verificationlink   text
+);
+
+comment on table public.userinfo is 'User Information to generate profile';
+
+comment on column public.userinfo.photoid is 'offline update';
+
+comment on column public.userinfo.taxdoc is 'offline update';
+
+comment on column public.userinfo.countryofbus is 'this will decide tax doc matching and currency';
+
+alter table public.userinfo
+    owner to postgres;
+
+
+
+
