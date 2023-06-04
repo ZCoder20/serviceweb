@@ -1,23 +1,12 @@
-package com.example.postgres.svc;
-import com.example.postgres.common.util.ByteUtil;
-import com.example.postgres.repo.OrderRepo;
-import com.example.postgres.repo.UserInfoRepo;
-import com.example.postgres.repo.domain.InlineRespone201;
-import com.example.postgres.repo.domain.OnlinePosting;
-import com.example.postgres.repo.domain.Order;
-import com.example.postgres.repo.domain.UserInfo;
+package com.example.svc;
+import com.example.repo.OrderRepo;
+import com.example.repo.domain.InlineRespone201;
+import com.example.repo.domain.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.nio.file.*;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+
 @Component
 public class OrderSvc {
 

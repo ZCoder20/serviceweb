@@ -1,4 +1,4 @@
-package com.example.postgres.common.util;
+package com.example.common.util;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

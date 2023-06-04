@@ -1,6 +1,6 @@
-package com.example.postgres.repo;
+package com.example.repo;
 
-import com.example.postgres.repo.domain.UserInfo;
+import com.example.repo.domain.UserInfo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

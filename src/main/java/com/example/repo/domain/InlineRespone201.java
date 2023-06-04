@@ -1,10 +1,9 @@
-package com.example.postgres.repo.domain;
+package com.example.repo.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
 @Getter
 @Setter
 public class InlineRespone201 {

@@ -1,13 +1,12 @@
-package com.example.postgres.controller;
+package com.example.controller;
 
-import com.example.postgres.common.util.FileDownloadUtil;
-import com.example.postgres.repo.domain.InlineRespone201;
-import com.example.postgres.repo.domain.OnlinePosting;
-import com.example.postgres.repo.domain.Order;
-import com.example.postgres.repo.domain.UserInfo;
-import com.example.postgres.svc.OnlinePostingSvc;
-import com.example.postgres.svc.OrderSvc;
-import com.example.postgres.svc.UserInfoSvc;
+import com.example.common.util.FileDownloadUtil;
+import com.example.repo.domain.InlineRespone201;
+import com.example.repo.domain.OnlinePosting;
+import com.example.repo.domain.Order;
+import com.example.svc.OnlinePostingSvc;
+import com.example.svc.OrderSvc;
+import com.example.svc.UserInfoSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Date;
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -99,6 +98,24 @@ public class ApplicationController {
     }
 
 
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/test")
+    public ResponseEntity<String> registerUsertestuser(
+                                               @RequestParam String firstName
+                                              ) throws IOException {
+
+try{
+    return ResponseEntity.ok("{\"name\":\"myname\"}");
+}
+catch(Exception ex)
+{
+    return ResponseEntity.ok(ex.getMessage().toString());
+}
+
+        // return ResponseEntity.ok("User resgistered");
+    }
+
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/onlinePosting")
     public HttpEntity<HttpStatus> postOnlineContent(@RequestBody OnlinePosting onlinePosting) {
         System.out.println("Posting");
@@ -106,36 +123,48 @@ public class ApplicationController {
         return new HttpEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @GetMapping(path = "/specificPosting")
-    public List<OnlinePosting> specificPosting(@RequestParam int category, @RequestParam String postTitle,
-                                               @RequestParam int totalF1, @RequestParam int totalF2,
-                                               @RequestParam int totalF3, @RequestParam int price) {
-        List<OnlinePosting> posts = onlinePostingSvc.findByparameter(category, postTitle, totalF1, totalF2, totalF3, price);
+
+
+
+    @GetMapping(path = "/searchall")
+    public List<OnlinePosting> specificPosting(@RequestParam String category, @RequestParam int price,
+                                               @RequestParam double totalF1,@RequestParam String plat,String pstlang) {
+
+System.out.println("category "+category);
+        System.out.println("price "+price);
+        System.out.println("totalF1 "+totalF1);
+        System.out.println("plat "+plat);
+        System.out.println("language "+pstlang);
+
+
+        List<OnlinePosting> posts = onlinePostingSvc.findAll(category, price,totalF1,plat,pstlang);
 
         return posts;
     }
 
-    @GetMapping(path = "/allPosting")
-    public List<OnlinePosting> allPosting() {
-        List<OnlinePosting> posts = onlinePostingSvc.findAll();
+    @GetMapping(path = "/latestpost")
+    public List<OnlinePosting> latestpost() {
+        List<OnlinePosting> posts = onlinePostingSvc.findAlllaterst();
 
         return posts;
     }
 
+
+//working
     @GetMapping(path = "/byCategory")
-    public List<OnlinePosting> postingByCategory(@RequestParam int category) {
+    public List<OnlinePosting> postingByCategory(@RequestParam String category) {
         List<OnlinePosting> posts = onlinePostingSvc.findByCategory(category);
 
         return posts;
     }
-
+//Working
     @GetMapping(path = "/byPrice")
     public List<OnlinePosting> postingByPrice(@RequestParam int price) {
         List<OnlinePosting> posts = onlinePostingSvc.findByPrice(price);
 
         return posts;
     }
-
+//Working
     @GetMapping(path = "/byTitle")
     public List<OnlinePosting> postingByTitle(@RequestParam String posttitle) {
 
@@ -144,6 +173,7 @@ public class ApplicationController {
         return posts;
     }
 
+    //Working
     // Order save
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/ordersave")
     public ResponseEntity<String> saveorder(@RequestParam int userId,
@@ -162,7 +192,7 @@ public class ApplicationController {
                 odrUrl, odrdetails, odrtitle, odrstatus, concent, istermaccepted);
         return ResponseEntity.ok("order detials saved successfully");
     }
-
+//Working
     @GetMapping(path = "/getorder")
     public List<Order> detailsByorder(@RequestParam int orderid) {
 
