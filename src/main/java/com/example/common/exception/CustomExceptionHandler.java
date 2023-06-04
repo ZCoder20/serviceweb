@@ -1,4 +1,4 @@
-package com.example.postgres.common.exception;
+package com.example.common.exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;

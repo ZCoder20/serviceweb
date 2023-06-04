@@ -1,4 +1,4 @@
-package com.example.postgres.common.util;
+package com.example.common.util;
 
 import java.io.*;
 import java.nio.ByteBuffer;

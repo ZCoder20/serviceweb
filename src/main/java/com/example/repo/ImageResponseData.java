@@ -1,4 +1,4 @@
-package com.example.postgres.repo;
+package com.example.repo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,8 +1,7 @@
-package com.example.postgres.repo;
+package com.example.repo;
 
 
-import com.example.postgres.repo.domain.Employee;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.repo.domain.Employee;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
