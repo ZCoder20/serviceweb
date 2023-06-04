@@ -1,8 +1,8 @@
-package com.example.postgres.svc;
+package com.example.svc;
 
-import com.example.postgres.repo.OnlinePostingRepo;
-import com.example.postgres.repo.domain.InlineRespone201;
-import com.example.postgres.repo.domain.OnlinePosting;
+import com.example.repo.OnlinePostingRepo;
+import com.example.repo.domain.InlineRespone201;
+import com.example.repo.domain.OnlinePosting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -46,6 +46,13 @@ public class OnlinePostingSvc {
         System.out.println(title);
         return onlinePostingRepo.findByPostTitle(title);
     }
+
+    public List<OnlinePosting> findByUserId(int userId) {
+        System.out.println(userId);
+        return onlinePostingRepo.findByUserId(userId);
+    }
+
+
 
 
 }

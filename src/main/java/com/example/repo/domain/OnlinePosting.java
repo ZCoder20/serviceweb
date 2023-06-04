@@ -1,4 +1,4 @@
-package com.example.postgres.repo.domain;
+package com.example.repo.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;

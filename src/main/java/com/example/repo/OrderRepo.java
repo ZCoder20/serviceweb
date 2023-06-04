@@ -1,6 +1,6 @@
-package com.example.postgres.repo;
+package com.example.repo;
 
-import com.example.postgres.repo.domain.Order;
+import com.example.repo.domain.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,5 +15,8 @@ public interface OrderRepo extends org.springframework.data.repository.Repositor
 
 
    List<Order> findByUseridAndPostid(int userid,int postid);
+
+   Order findByPostid(int postId);
+
 
 }

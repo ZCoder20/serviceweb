@@ -1,7 +1,7 @@
-package com.example.postgres.repo;
+package com.example.repo;
 
 
-import com.example.postgres.repo.domain.OnlinePosting;
+import com.example.repo.domain.OnlinePosting;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,4 +21,6 @@ public interface OnlinePostingRepo extends org.springframework.data.repository.R
     List<OnlinePosting> findByPrice(int price);
 
     List<OnlinePosting> findByPostTitle(String title);
+
+    List<OnlinePosting> findByUserId(int userId);
 }

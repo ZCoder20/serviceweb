@@ -1,9 +1,9 @@
-package com.example.postgres.svc;
+package com.example.svc;
 
-import com.example.postgres.common.util.ByteUtil;
-import com.example.postgres.repo.UserInfoRepo;
-import com.example.postgres.repo.domain.InlineRespone201;
-import com.example.postgres.repo.domain.UserInfo;
+import com.example.common.util.ByteUtil;
+import com.example.repo.UserInfoRepo;
+import com.example.repo.domain.InlineRespone201;
+import com.example.repo.domain.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -128,9 +129,14 @@ public class UserInfoSvc {
                 .verificationLink(verificationLink).build();
 
         UserInfo userInfo1 = userInfoRepo.save(userInfo);
+        System.out.println(userInfo1);
         return new InlineRespone201().postingIdentifier(userInfo1.getUserId());
 
 
+    }
+    public UserInfo byUserId(int userId){
+
+        return userInfoRepo.findUserInfoByUserId(userId);
     }
 
 

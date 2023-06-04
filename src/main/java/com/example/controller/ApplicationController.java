@@ -1,13 +1,13 @@
-package com.example.postgres.controller;
+package com.example.controller;
 
-import com.example.postgres.common.util.FileDownloadUtil;
-import com.example.postgres.repo.domain.InlineRespone201;
-import com.example.postgres.repo.domain.OnlinePosting;
-import com.example.postgres.repo.domain.Order;
-import com.example.postgres.repo.domain.UserInfo;
-import com.example.postgres.svc.OnlinePostingSvc;
-import com.example.postgres.svc.OrderSvc;
-import com.example.postgres.svc.UserInfoSvc;
+import com.example.common.util.FileDownloadUtil;
+import com.example.repo.domain.InlineRespone201;
+import com.example.repo.domain.OnlinePosting;
+import com.example.repo.domain.Order;
+import com.example.repo.domain.UserInfo;
+import com.example.svc.OnlinePostingSvc;
+import com.example.svc.OrderSvc;
+import com.example.svc.UserInfoSvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
@@ -37,11 +37,7 @@ public class ApplicationController {
 
     }
 
-   /* @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/getImage")
-    public ResponseEntity<byte[]> getImage() throws IOException, ClassNotFoundException {
-       return userInfoSvc.getImage();
 
-    }*/
 
     @GetMapping("{getImage}")
     public ResponseEntity<?> downloadFile(@PathVariable("getImage") String fileCode) {
@@ -97,6 +93,15 @@ public class ApplicationController {
                 categoryPreference, emailId, phoneNum1, countryOfBusiness, verificationLink, imageFile);
         return ResponseEntity.ok("User resgistered");
     }
+    // to get user by the id
+    @GetMapping(path="/getUserById",produces =MediaType.APPLICATION_JSON_VALUE)
+    public HttpEntity<UserInfo> byUserId(@RequestParam int userId){
+        System.out.println("byUserId");
+
+       // System.out.println(userInfoSvc.byUserId(userId));
+
+        return  ResponseEntity.ok().body(userInfoSvc.byUserId(userId));
+    }
 
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/onlinePosting")
@@ -121,7 +126,13 @@ public class ApplicationController {
 
         return posts;
     }
+    @GetMapping(path = "/postingByUserId")
+    public List<OnlinePosting> postingByUserId(@RequestParam int userId) {
+        System.out.println(userId);
+        List<OnlinePosting> posts = onlinePostingSvc.findByUserId(userId);
 
+        return posts;
+    }
     @GetMapping(path = "/byCategory")
     public List<OnlinePosting> postingByCategory(@RequestParam int category) {
         List<OnlinePosting> posts = onlinePostingSvc.findByCategory(category);
@@ -169,6 +180,14 @@ public class ApplicationController {
         List<Order> order = ordersvc.findByUserid(orderid);
 
         return order;
+    }
+
+    @GetMapping(path="/oderByPostId" )
+    public HttpEntity<Order> byOderByPostId(@RequestParam int postId){
+        System.out.println("OderByPostId");
+        System.out.println(ordersvc.oderByPostId(postId));
+        ResponseEntity.ok().body( ordersvc.oderByPostId(postId));
+        return ResponseEntity.ok().body( ordersvc.oderByPostId(postId));
     }
 
 }

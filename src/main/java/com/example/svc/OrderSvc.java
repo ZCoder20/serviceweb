@@ -1,11 +1,11 @@
-package com.example.postgres.svc;
-import com.example.postgres.common.util.ByteUtil;
-import com.example.postgres.repo.OrderRepo;
-import com.example.postgres.repo.UserInfoRepo;
-import com.example.postgres.repo.domain.InlineRespone201;
-import com.example.postgres.repo.domain.OnlinePosting;
-import com.example.postgres.repo.domain.Order;
-import com.example.postgres.repo.domain.UserInfo;
+package com.example.svc;
+import com.example.common.util.ByteUtil;
+import com.example.repo.OrderRepo;
+import com.example.repo.UserInfoRepo;
+import com.example.repo.domain.InlineRespone201;
+import com.example.repo.domain.OnlinePosting;
+import com.example.repo.domain.Order;
+import com.example.repo.domain.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,5 +47,10 @@ public class OrderSvc {
     public List<Order> findByUserid(int orderid) {
 
         return orderrepo.findByUserid(orderid);
+    }
+
+    public Order oderByPostId(int postId) {
+
+        return orderrepo.findByPostid(postId);
     }
 }
